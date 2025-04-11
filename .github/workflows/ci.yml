@@ -1,0 +1,27 @@
+name: Homework CI Check
+
+# Run this workflow on pull requests targeting the main branch
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  script_check:
+    runs-on: ubuntu-latest # Use a standard runner
+
+    steps:
+      # Step 1: Checkout the code from the PR branch
+      - name: Checkout code
+        uses: actions/checkout@v4 # This is a standard step
+
+      # Requirement 2: Add at least two extra steps
+      - name: Extra Step 1 - Show Current Directory # Extra Step 1
+        run: pwd
+
+      - name: Extra Step 2 - List Files # Extra Step 2
+        run: ls -la
+
+      # Requirement 3 & 4: Run the script which differs between branches
+      # This step's success/failure depends on check_script.sh from the specific PR branch
+      - name: Run the check script
+        run: ./check_script.sh # Execute the script in the root directory
